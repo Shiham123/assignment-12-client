@@ -4,6 +4,16 @@ export default withMT({
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
+    colors: {
+      colorOne: '#274584',
+      colorTwo: '#ffffff',
+      colorThree: '#e3f6f9',
+      colorFour: '#2b2b2b',
+    },
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+      roboto: ['Roboto', 'sans-serif'],
+    },
   },
   plugins: [require('daisyui')],
 });
