@@ -6,6 +6,7 @@ import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import SurveyPage from '../Pages/SurveyPage/SurveyPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
+import DrawerLayout from '../Layout/DrawerLayout';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: '/registerPage', element: <RegisterPage /> },
     ],
   },
+  { path: '/dashBroad', element: <DrawerLayout /> },
 ]);
 
 export default router;

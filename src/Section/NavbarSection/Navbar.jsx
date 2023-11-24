@@ -64,6 +64,17 @@ const Navbar = () => {
                 >
                   Survey Page
                 </NavLink>
+                {/* Drawer or dashBroad */}
+                <NavLink
+                  to="/dashBroad"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'font-poppins text-white font-semibold px-4'
+                      : 'font-poppins text-colorFour font-semibold px-4'
+                  }
+                >
+                  DashBroad
+                </NavLink>
               </div>
             </ul>
           </div>
@@ -110,6 +121,17 @@ const Navbar = () => {
               }
             >
               Survey Page
+            </NavLink>
+            {/* Drawer or dashBroad */}
+            <NavLink
+              to="/dashBroad"
+              className={({ isActive }) =>
+                isActive
+                  ? 'font-poppins text-colorFive font-semibold px-4'
+                  : 'font-poppins text-white font-semibold px-4'
+              }
+            >
+              DashBroad
             </NavLink>
           </ul>
         </div>
