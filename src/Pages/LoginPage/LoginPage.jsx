@@ -17,7 +17,10 @@ const LoginPage = () => {
 
   return (
     <section className="p-4">
-      <SectionTitle heading="Login page" subHeading="Please login" />
+      <SectionTitle
+        heading="Login page"
+        subHeading="Please login with your account"
+      />
       <div className="flex justify-center items-center my-20">
         <div className="bg-colorTwo rounded-lg">
           <form className="m-[5rem]" onSubmit={handleSubmit(onSubmit)}>

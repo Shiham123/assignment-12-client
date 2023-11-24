@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './main.css';
 import { RouterProvider } from 'react-router-dom';
 import router from './Routes/Router';
+import { AppProvider } from './AppContext/context';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <div className="bg-colorThree">
-      <RouterProvider router={router} />
-    </div>
+    <AppProvider>
+      <div className="bg-colorThree">
+        <RouterProvider router={router} />
+      </div>
+    </AppProvider>
   </React.StrictMode>
 );
