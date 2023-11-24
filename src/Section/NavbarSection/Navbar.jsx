@@ -1,8 +1,19 @@
 import { Link, NavLink } from 'react-router-dom';
 import { IoMenuSharp } from 'react-icons/io5';
 import ButtonComponent from '../../SubComponent/button';
+import useAuth from '../../Hooks/useAuth';
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const username = user?.displayName;
+  const photoUrl = user?.photoURL;
+
+  const handleLogout = () => {
+    logOut()
+      .then((result) => console.log(result))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       <div className="navbar bg-colorOne px-8">
@@ -96,9 +107,34 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <Link to="/loginPage">
-            <ButtonComponent />
-          </Link>
+          <div className="flex justify-center items-center gap-4 mx-8">
+            <div>
+              {username && (
+                <p className="font-cinzel text-colorTwo font-bold">
+                  {username}
+                </p>
+              )}
+            </div>
+            <div className="border-[1px] border-colorTwo rounded-lg">
+              {photoUrl && (
+                <img width={30} className="rounded-lg" src={photoUrl} />
+              )}
+            </div>
+          </div>
+          <div>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="bg-colorThree px-4 py-2 text-sm md:text-xl lg:text-2xl font-poppins font-semibold tracking-wide rounded-lg border-2 border-colorThree duration-200 hover:bg-transparent hover:text-colorThree"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/loginPage">
+                <ButtonComponent />
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
