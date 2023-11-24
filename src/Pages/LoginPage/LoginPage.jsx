@@ -1,9 +1,11 @@
 // LoginPage.js
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ButtonComponent from '../../SubComponent/button';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SectionTitle from '../../SubSection/SectionTitle';
+import useAuth from '../../Hooks/useAuth';
+import swal from 'sweetalert';
 
 const LoginPage = () => {
   const [loginBtn] = useState(true);
@@ -12,8 +14,22 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { loginUser } = useAuth();
+  const formRef = useRef(null);
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    loginUser(email, password)
+      .then((result) => {
+        console.log(result);
+        formRef.current.reset();
+        swal('login successfully', 'you logged in successfully', 'success');
+        // navigate(from, { replace: true });
+        navigate('/');
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <section className="p-4">
@@ -23,7 +39,11 @@ const LoginPage = () => {
       />
       <div className="flex justify-center items-center my-20">
         <div className="bg-colorTwo rounded-lg">
-          <form className="m-[5rem]" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="m-[5rem]"
+            onSubmit={handleSubmit(onSubmit)}
+            ref={formRef}
+          >
             <div className="form-control my-8">
               <label className="label">
                 <span className="font-cinzel text-2xl uppercase font-semibold tracking-widest">

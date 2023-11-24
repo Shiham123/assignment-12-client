@@ -1,8 +1,11 @@
 import { useForm } from 'react-hook-form';
 import ButtonComponent from '../../SubComponent/button';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import SectionTitle from '../../SubSection/SectionTitle';
+import useAuth from '../../Hooks/useAuth';
+import usePublicApi from '../../Hooks/usePublicApi';
+import swal from 'sweetalert';
 
 const RegisterPage = () => {
   const [registerBtn] = useState(true);
@@ -11,8 +14,45 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const formRef = useRef(null);
+  const publicApi = usePublicApi();
 
-  const onSubmit = (data) => console.log(data);
+  const { createUser, profileUpdate, logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    const { username, url, password, email } = data;
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+
+        profileUpdate(username, url)
+          .then((result) => {
+            console.log(result);
+            formRef.current.reset();
+
+            const userInfo = { username, url, email };
+            publicApi
+              .post('/users', userInfo)
+              .then((response) => console.log(response))
+              .catch((error) => console.log(error));
+
+            logOut()
+              .then((result) => {
+                console.log(result);
+                swal(
+                  'Create user successfully',
+                  'user Created Successfully',
+                  'success'
+                );
+                navigate('/loginPage');
+              })
+              .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="p-4">
@@ -23,7 +63,11 @@ const RegisterPage = () => {
 
       <div className="flex justify-center items-center my-20">
         <div className="bg-colorTwo rounded-lg">
-          <form className="m-[5rem]" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="m-[5rem]"
+            onSubmit={handleSubmit(onSubmit)}
+            ref={formRef}
+          >
             <div className="form-control my-8">
               <label className="label">
                 <span className="font-cinzel text-2xl uppercase font-semibold tracking-widest">
