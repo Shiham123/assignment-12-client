@@ -1,0 +1,26 @@
+[
+  {
+    "name": "John Doe",
+    "feedback": "Great survey platform! The user interface is intuitive, and I love the variety of survey templates available.",
+    "date": "2023-01-15",
+    "image": "https://i.ibb.co/FB5SRym/linkedin-sales-solutions-p-At-A8xe-i-VM-unsplash.jpg"
+  },
+  {
+    "name": "Jane Smith",
+    "feedback": "I've used several survey tools in the past, and this one stands out for its simplicity and robust features. Highly recommended!",
+    "date": "2023-02-03",
+    "image": "https://i.ibb.co/bsMJBxY/ed-pylypenko-7zcbtb-I4-E2o-unsplash.jpg"
+  },
+  {
+    "name": "Bob Johnson",
+    "feedback": "The customer support team is fantastic. Quick responses and helpful solutions. It's a pleasure using this survey website.",
+    "date": "2023-03-10",
+    "image": "https://i.ibb.co/mtLMJbD/alex-suprun-ZHv-M3-XIOHo-E-unsplash.jpg"
+  },
+  {
+    "name": "Alice Williams",
+    "feedback": "I appreciate the customization options available. It allows me to tailor surveys to fit the specific needs of my projects.",
+    "date": "2023-04-22",
+    "image": "https://i.ibb.co/xjgjr3d/alexander-hipp-i-EEBWg-Y-6l-A-unsplash.jpg"
+  }
+]
