@@ -2,7 +2,7 @@ import FooterLogo from '../../assets/logo.png';
 
 const Footer = () => {
   return (
-    <section>
+    <section className="mt-[10rem]">
       <footer className="footer footer-center p-10 bg-colorOne text-colorTwo">
         <aside>
           <div>

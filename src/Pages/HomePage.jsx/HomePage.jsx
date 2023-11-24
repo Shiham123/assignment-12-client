@@ -4,11 +4,11 @@ import TestimonialSection from '../../Section/TestimonialSection/TestimonialSect
 
 const HomePage = () => {
   return (
-    <section className="bg-colorThree">
+    <>
       <HeroSection />
       <TestimonialSection />
       <FaqSection />
-    </section>
+    </>
   );
 };
 
