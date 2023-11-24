@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What is the purpose of this survey?",
+    "answer": "The survey aims to gather feedback and insights to improve our products/services and better understand the needs of our customers."
+  },
+  {
+    "question": "Is participation in the survey anonymous?",
+    "answer": "Yes, your responses are completely anonymous. We do not collect any personally identifiable information unless explicitly stated."
+  },
+  {
+    "question": "How long will it take to complete the survey?",
+    "answer": "The survey typically takes around 10-15 minutes to complete, but the exact duration may vary based on individual responses."
+  },
+  {
+    "question": "Can I skip questions in the survey?",
+    "answer": "Yes, you can skip any question you prefer not to answer. However, providing as much information as possible helps us gain valuable insights."
+  },
+  {
+    "question": "What happens to the survey data after completion?",
+    "answer": "The survey data is securely stored and analyzed for research purposes. We adhere to strict privacy policies, and individual responses are not shared or disclosed without consent."
+  }
+]

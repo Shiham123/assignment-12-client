@@ -6,8 +6,6 @@ import SectionTitle from '../../SubSection/SectionTitle';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { FaUser } from 'react-icons/fa';
-
 const TestimonialSection = () => {
   const [testimonialData, setTestimonialData] = useState([]);
   useEffect(() => {
@@ -25,19 +23,13 @@ const TestimonialSection = () => {
           const { name, feedback, date, image } = item;
 
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              className="hover:bg-colorTwo duration-300 rounded-full"
+            >
               <div className="flex flex-col justify-center items-center my-[5rem] gap-8">
                 <div>
-                  {image ? (
-                    <img
-                      width={70}
-                      className="rounded-full"
-                      src={image}
-                      alt=""
-                    />
-                  ) : (
-                    <FaUser />
-                  )}
+                  <img width={70} className="rounded-full" src={image} alt="" />
                 </div>
                 <h1 className="text-xl md:text-2xl lg:text-3xl font-poppins text-colorFive uppercase font-semibold">
                   {name}

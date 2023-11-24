@@ -7,7 +7,7 @@ const SectionTitle = (props) => {
       <h1 className="text-2xl md:text-3xl lg:text-4xl text-colorOne font-bold font-cinzel uppercase py-4">
         {heading}
       </h1>
-      <h2 className="text-xl md:text-2xl lg:text-3xl font-poppins font-semibold text-colorFour tracking-widest capitalize py-4 border-b-2 border-colorFive">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-cinzel font-semibold text-colorFour tracking-widest capitalize py-4 border-b-2 border-colorFive">
         {subHeading}
       </h2>
     </div>
