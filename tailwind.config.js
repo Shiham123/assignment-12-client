@@ -9,6 +9,7 @@ export default withMT({
       colorTwo: '#ffffff',
       colorThree: '#e3f6f9',
       colorFour: '#2b2b2b',
+      colorFive: '#6c99e3',
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
