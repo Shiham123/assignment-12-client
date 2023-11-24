@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { IoMenuSharp } from 'react-icons/io5';
 import ButtonComponent from '../../SubComponent/button';
 import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -10,7 +11,13 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut()
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          icon: 'success',
+          text: 'Logout successfully!',
+        });
+      })
       .catch((error) => console.log(error));
   };
 
@@ -115,9 +122,13 @@ const Navbar = () => {
                 </p>
               )}
             </div>
-            <div className="border-[1px] border-colorTwo rounded-lg">
+            <div>
               {photoUrl && (
-                <img width={30} className="rounded-lg" src={photoUrl} />
+                <img
+                  width={30}
+                  className="rounded-lg border-colorTwo"
+                  src={photoUrl}
+                />
               )}
             </div>
           </div>
