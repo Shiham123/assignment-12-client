@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import SectionTitle from '../../SubSection/SectionTitle';
 import useAuth from '../../Hooks/useAuth';
 import swal from 'sweetalert';
+import { AiOutlineGoogle } from 'react-icons/ai';
+import usePublicApi from '../../Hooks/usePublicApi';
 
 const LoginPage = () => {
   const [loginBtn] = useState(true);
@@ -14,9 +16,10 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { loginUser } = useAuth();
+  const { loginUser, socialLogin } = useAuth();
   const formRef = useRef(null);
   const navigate = useNavigate();
+  const publicApi = usePublicApi();
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -27,6 +30,26 @@ const LoginPage = () => {
         swal('login successfully', 'you logged in successfully', 'success');
         // navigate(from, { replace: true });
         navigate('/');
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const googleLogin = () => {
+    socialLogin()
+      .then((result) => {
+        console.log(result);
+        navigate('/');
+
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          url: result.user?.photoURL,
+        };
+
+        publicApi.post('/users', userInfo).then((response) => {
+          console.log(response);
+          navigate('/');
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -93,6 +116,12 @@ const LoginPage = () => {
                 <span className="font-semibold uppercase">Register</span>
               </Link>
             </p>
+            <div
+              onClick={googleLogin}
+              className="w-full bg-colorFive flex justify-center items-center p-4 rounded-lg cursor-pointer hover:bg-transparent  border-2 border-colorFive duration-300 gap-4"
+            >
+              <AiOutlineGoogle size={30} /> <span>Login with google</span>
+            </div>
           </div>
         </div>
       </div>
