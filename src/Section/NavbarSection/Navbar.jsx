@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { IoMenuSharp } from 'react-icons/io5';
+import ButtonComponent from '../../SubComponent/button';
 
 const Navbar = () => {
   return (
@@ -55,7 +56,7 @@ const Navbar = () => {
               src="/src/assets/logo.png"
               alt=""
             />
-            <h1 className="text-4xl py-4 font-poppins font-bold text-colorThree uppercase">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl py-4 font-cinzel font-bold text-colorThree uppercase">
               Survey Website
             </h1>
           </div>
@@ -96,9 +97,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <Link to="/loginPage">
-            <button className="bg-colorThree px-4 py-2 text-2xl font-poppins font-semibold tracking-wide rounded-lg border-2 border-colorThree duration-200 hover:bg-transparent hover:text-colorThree">
-              Login/Register
-            </button>
+            <ButtonComponent />
           </Link>
         </div>
       </div>

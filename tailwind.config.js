@@ -13,7 +13,8 @@ export default withMT({
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
-      roboto: ['Roboto', 'sans-serif'],
+      cinzel: ['Cinzel', 'sans-serif'],
+      playfairDisplay: ['Playfair Display', 'sans-serif'],
     },
   },
   plugins: [require('daisyui')],
