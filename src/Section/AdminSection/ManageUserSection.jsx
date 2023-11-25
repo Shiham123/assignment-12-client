@@ -1,17 +1,45 @@
 import { useQuery } from '@tanstack/react-query';
 import useSecureApi from '../../Hooks/useSecureApi';
 import SectionTitle from '../../SubSection/SectionTitle';
+import Swal from 'sweetalert2';
 
 const ManageUserSection = () => {
   const secureApi = useSecureApi();
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const response = await secureApi.get('/users');
       return response.data;
     },
   });
+
+  const deleteUser = (id, name) => {
+    Swal.fire({
+      title: `Are you sure? delete ${name} user`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#6c99e3',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes Delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'DELETED',
+          text: `You deleted ${name} this user`,
+          icon: 'success',
+        });
+
+        secureApi
+          .delete(`/users/${id}`)
+          .then((response) => {
+            console.log(response.data);
+            refetch();
+          })
+          .catch((error) => console.log(error));
+      }
+    });
+  };
 
   return (
     <div>
@@ -47,7 +75,6 @@ const ManageUserSection = () => {
           {/* body */}
           <tbody>
             {users.map((item, index) => {
-              console.log(item);
               const { _id, username, role, email } = item;
               return (
                 <tr key={_id} className="m-4">
@@ -64,7 +91,10 @@ const ManageUserSection = () => {
                     {role}
                   </td>
                   <td className="border-2 border-colorTwo">
-                    <button className="font-cinzel text-2xl text-colorFour font-semibold ">
+                    <button
+                      onClick={() => deleteUser(_id, username)}
+                      className="font-cinzel text-2xl text-colorFour font-semibold "
+                    >
                       Delete
                     </button>
                   </td>
