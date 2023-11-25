@@ -61,6 +61,18 @@ const AdminPanel = () => {
               Response
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashBroad/paymentUser"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-3xl font-semibold font-cinzel'
+                  : 'text-3xl text-colorFour font-semibold font-cinzel'
+              }
+            >
+              Payment
+            </NavLink>
+          </li>
 
           {/*  */}
           <li className="border-t-2 border-colorFour pt-8">

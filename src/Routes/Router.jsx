@@ -11,6 +11,11 @@ import ManageUserSection from '../Section/AdminSection/ManageUserSection';
 import ChartSection from '../Section/AdminSection/ChartSection';
 import SurveyStatusSection from '../Section/AdminSection/SurveyStatusSection';
 import SurveyResponseSection from '../Section/AdminSection/SurveyResponseSection';
+import PaymentSection from '../Section/AdminSection/PaymentSection';
+import CreateSurveySection from '../Section/ServeyorSection/CreateSurveySection';
+import UserFeedbackSection from '../Section/ServeyorSection/UserFeedbackSection';
+import AdminFeedbackSection from '../Section/ServeyorSection/AdminFeedbackSection';
+import SurveyResponse from '../Section/ServeyorSection/SurveyResponse';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +38,13 @@ const router = createBrowserRouter([
       { path: 'manageUser', element: <ManageUserSection /> },
       { path: 'surveyStatus', element: <SurveyStatusSection /> },
       { path: 'surveyResponse', element: <SurveyResponseSection /> },
+      { path: 'paymentUser', element: <PaymentSection /> },
+
+      // Survey route
+      { path: 'createSurvey', element: <CreateSurveySection /> },
+      { path: 'UserFeedback', element: <UserFeedbackSection /> },
+      { path: 'adminFeedback', element: <AdminFeedbackSection /> },
+      { path: 'responseSurvey', element: <SurveyResponse /> },
     ],
   },
 ]);

@@ -14,6 +14,64 @@ const ManageUserSection = () => {
     },
   });
 
+  const makeAdmin = (item) => {
+    const { _id, username } = item;
+    Swal.fire({
+      title: `Are you sure make ${username} admin?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#6c99e3',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes Make admin',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedAdmin = { role: 'admin' };
+        secureApi
+          .patch(`/users/admin/${_id}`, updatedAdmin)
+          .then((response) => {
+            if (response.data.matchedCount) {
+              Swal.fire({
+                title: 'CHANGED',
+                text: `You Changed ${username} this user`,
+                icon: 'success',
+              });
+              refetch();
+            }
+          })
+          .catch((error) => console.log(error));
+      }
+    });
+  };
+
+  const makeSurveyor = (item) => {
+    const { _id, username } = item;
+    Swal.fire({
+      title: `Are you sure make ${username} Surveyor?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#6c99e3',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes Make Surveyor',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedAdmin = { role: 'surveyor' };
+        secureApi
+          .patch(`/users/admin/${_id}`, updatedAdmin)
+          .then((response) => {
+            if (response.data.matchedCount) {
+              Swal.fire({
+                title: 'CHANGED',
+                text: `You Changed ${username} to surveyor`,
+                icon: 'success',
+              });
+              refetch();
+            }
+          })
+          .catch((error) => console.log(error));
+      }
+    });
+  };
+
   const deleteUser = (id, name) => {
     Swal.fire({
       title: `Are you sure? delete ${name} user`,
@@ -99,9 +157,27 @@ const ManageUserSection = () => {
                     </button>
                   </td>
                   <td className="border-2 border-colorTwo">
-                    <button className="font-cinzel text-2xl text-colorFour font-semibold">
-                      Change role
-                    </button>
+                    {role === 'admin' ? (
+                      <button
+                        onClick={() => {
+                          makeSurveyor(item);
+                        }}
+                        className="font-cinzel text-2xl text-colorFour font-semibold"
+                      >
+                        {role}
+                      </button>
+                    ) : role === 'surveyor' ? (
+                      <button
+                        onClick={() => makeAdmin(item)}
+                        className="font-cinzel text-2xl text-colorFour font-semibold"
+                      >
+                        {role}
+                      </button>
+                    ) : (
+                      <button className="font-cinzel text-2xl text-colorFour font-semibold">
+                        {role}
+                      </button>
+                    )}
                   </td>
                 </tr>
               );

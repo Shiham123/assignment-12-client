@@ -15,47 +15,47 @@ const SurveyorPanel = () => {
         <div className="flex flex-col gap-8">
           <li>
             <NavLink
-              to="/dashBroad/charts"
+              to="/dashBroad/createSurvey"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-3xl font-semibold font-cinzel'
-                  : 'text-3xl text-colorFour font-semibold font-cinzel'
+                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-xl font-semibold font-cinzel'
+                  : 'text-xl text-colorFour font-semibold font-cinzel'
               }
             >
-              OverView
+              Create survey
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/dashBroad/manageUser"
+              to="/dashBroad/UserFeedback"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-3xl font-semibold font-cinzel'
-                  : 'text-3xl text-colorFour font-semibold font-cinzel'
+                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-xl font-semibold font-cinzel'
+                  : 'text-xl text-colorFour font-semibold font-cinzel'
               }
             >
-              Users
+              User Feedback
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/dashBroad/surveyStatus"
+              to="/dashBroad/adminFeedback"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-3xl font-semibold font-cinzel'
-                  : 'text-3xl text-colorFour font-semibold font-cinzel'
+                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-xl font-semibold font-cinzel'
+                  : 'text-xl text-colorFour font-semibold font-cinzel'
               }
             >
-              Status
+              Admin Feedback
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/dashBroad/surveyResponse"
+              to="/dashBroad/responseSurvey"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-3xl font-semibold font-cinzel'
-                  : 'text-3xl text-colorFour font-semibold font-cinzel'
+                  ? 'text-colorTwo bg-colorOne px-4 py-2 rounded-lg text-xl font-semibold font-cinzel'
+                  : 'text-xl text-colorFour font-semibold font-cinzel'
               }
             >
               Response
