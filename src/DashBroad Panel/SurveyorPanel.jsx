@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom';
 
-const UserPanel = () => {
+const SurveyorPanel = () => {
   return (
     <div className="w-64 min-h-screen bg-colorTwo">
       <div className="px-8 my-12">
         <h1 className="font-cinzel font-[900] text-[23px] text-footerBgColorThree">
-          User
+          Surveyor
         </h1>
         <h2 className="font-cinzel text-[17px] font-bold text-footerBgColorThree tracking-[7px]">
           DashBroad
@@ -77,4 +77,4 @@ const UserPanel = () => {
   );
 };
 
-export default UserPanel;
+export default SurveyorPanel;

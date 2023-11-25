@@ -1,11 +1,11 @@
 import AdminPanel from '../DashBroad Panel/AdminPanel';
-import UserPanel from '../DashBroad Panel/UserPanel';
+import SurveyorPanel from '../DashBroad Panel/SurveyorPanel';
 import useAdmin from '../Hooks/useAdmin';
 
 const DashBroadLayout = () => {
   const [isAdmin] = useAdmin();
 
-  return isAdmin ? <AdminPanel /> : <UserPanel />;
+  return isAdmin ? <AdminPanel /> : <SurveyorPanel />;
 };
 
 export default DashBroadLayout;
