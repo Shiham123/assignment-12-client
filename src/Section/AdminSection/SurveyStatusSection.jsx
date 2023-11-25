@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import useSecureApi from '../../Hooks/useSecureApi';
 import SectionTitle from '../../SubSection/SectionTitle';
+import Swal from 'sweetalert2';
 
 const SurveyStatusSection = () => {
   const secureApi = useSecureApi();
@@ -12,6 +13,76 @@ const SurveyStatusSection = () => {
       return response.data;
     },
   });
+
+  const surveyUnpublish = (item) => {
+    const { _id } = item;
+    Swal.fire({
+      title: 'Enter your message',
+      input: 'text',
+      inputPlaceholder: 'Type your message here...',
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      cancelButtonText: 'Cancel',
+      showLoaderOnConfirm: true,
+      preConfirm: (message) => {
+        if (!message) {
+          Swal.showValidationMessage('Message cannot be empty');
+        }
+        return message;
+      },
+    })
+      .then((result) => {
+        const enteredMessage = result.value;
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Message Submitted',
+            text: `You entered: ${result.value}`,
+            icon: 'success',
+          });
+        }
+
+        const feedback = {
+          enteredMessage,
+        };
+
+        secureApi
+          .put(`/survey/${_id}`, feedback)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const surveyPublish = (item) => {
+    const { _id } = item;
+    Swal.fire({
+      title: `Are you sure? publish`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#6c99e3',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'Yes Publish',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Published',
+          text: `You Published successfully`,
+          icon: 'success',
+        });
+
+        const publishSurvey = {
+          status: 'published',
+        };
+
+        secureApi
+          .patch(`/survey/${_id}`, publishSurvey)
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+      }
+    });
+  };
 
   return (
     <div>
@@ -57,12 +128,18 @@ const SurveyStatusSection = () => {
                     {title}
                   </th>
                   <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    <button className="font-cinzel text-2xl text-colorFour font-semibold">
+                    <button
+                      onClick={() => surveyPublish(item)}
+                      className="font-cinzel text-2xl text-colorFour font-semibold"
+                    >
                       Publish
                     </button>
                   </th>
                   <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    <button className="font-cinzel text-2xl text-colorFour font-semibold">
+                    <button
+                      onClick={() => surveyUnpublish(item)}
+                      className="font-cinzel text-2xl text-colorFour font-semibold"
+                    >
                       UnPublish
                     </button>
                   </th>

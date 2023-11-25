@@ -25,6 +25,7 @@ const CreateSurveySection = () => {
       noVoted,
       liked,
       disliked,
+      status: 'unpublished',
     };
     console.log(formData);
 
