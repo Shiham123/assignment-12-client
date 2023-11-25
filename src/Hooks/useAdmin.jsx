@@ -10,7 +10,6 @@ const useAdmin = () => {
     queryKey: [user?.email, 'isAdmin'],
     queryFn: async () => {
       const response = await secureApi.get(`/users/admin/${user.email}`);
-      console.log(response);
       return response.data?.isAdmin;
     },
   });

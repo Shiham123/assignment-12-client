@@ -61,6 +61,16 @@ const UserPanel = () => {
               Response
             </NavLink>
           </li>
+
+          {/*  */}
+          <li className="border-t-2 border-colorFour pt-8">
+            <NavLink
+              to="/"
+              className={'text-3xl text-colorFour font-semibold font-cinzel'}
+            >
+              Home
+            </NavLink>
+          </li>
         </div>
       </ul>
     </div>

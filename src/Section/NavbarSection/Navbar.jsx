@@ -3,11 +3,14 @@ import { IoMenuSharp } from 'react-icons/io5';
 import ButtonComponent from '../../SubComponent/button';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import useUsers from '../../Hooks/useUsers';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const username = user?.displayName;
   const photoUrl = user?.photoURL;
+
+  const [isNormalUser] = useUsers();
 
   const handleLogout = () => {
     logOut()
@@ -123,16 +126,20 @@ const Navbar = () => {
               Survey Page
             </NavLink>
             {/* Drawer or dashBroad */}
-            <NavLink
-              to="/dashBroad"
-              className={({ isActive }) =>
-                isActive
-                  ? 'font-poppins text-colorFive font-semibold px-4'
-                  : 'font-poppins text-white font-semibold px-4'
-              }
-            >
-              DashBroad
-            </NavLink>
+            {isNormalUser ? (
+              ''
+            ) : (
+              <NavLink
+                to="/dashBroad"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'font-poppins text-colorFive font-semibold px-4'
+                    : 'font-poppins text-white font-semibold px-4'
+                }
+              >
+                DashBroad
+              </NavLink>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
