@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import SectionTitle from '../../SubSection/SectionTitle';
 import { useState } from 'react';
+import useSecureApi from '../../Hooks/useSecureApi';
+import swal from 'sweetalert';
 
 const CreateSurveySection = () => {
   const [yesVoted] = useState(0);
@@ -14,6 +16,8 @@ const CreateSurveySection = () => {
     formState: { errors },
   } = useForm();
 
+  const secureApi = useSecureApi();
+
   const onSubmit = (data) => {
     const formData = {
       ...data,
@@ -23,6 +27,13 @@ const CreateSurveySection = () => {
       disliked,
     };
     console.log(formData);
+
+    swal('Survey created', 'Happy survey', 'success');
+
+    secureApi
+      .post('/survey', formData)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return (

@@ -1,5 +1,79 @@
+import { useQuery } from '@tanstack/react-query';
+import useSecureApi from '../../Hooks/useSecureApi';
+import SectionTitle from '../../SubSection/SectionTitle';
+
 const SurveyStatusSection = () => {
-  return <div>this is survey status section</div>;
+  const secureApi = useSecureApi();
+
+  const { data: surveyItems = [] } = useQuery({
+    queryKey: ['items'],
+    queryFn: async () => {
+      const response = await secureApi.get('/survey');
+      return response.data;
+    },
+  });
+
+  return (
+    <div>
+      <SectionTitle
+        heading="Survey status"
+        subHeading="publish or unpublish survey"
+      />
+
+      <div className="overflow-x-hidden">
+        <table className="table">
+          <thead>
+            <tr className="bg-colorFive font-cinzel text-xl">
+              <th className="text-colorTwo font-poppins tracking-wider">
+                Number
+              </th>
+              <th className="text-colorTwo font-poppins tracking-wider">
+                category
+              </th>
+              <th className="text-colorTwo font-poppins tracking-wider">
+                title
+              </th>
+              <th className="text-colorTwo font-poppins tracking-wider">
+                Publish
+              </th>
+              <th className="text-colorTwo font-poppins tracking-wider">
+                UnPublish
+              </th>
+            </tr>
+          </thead>
+          {/* body */}
+          <tbody>
+            {surveyItems.map((item, index) => {
+              const { _id, category, title } = item;
+              return (
+                <tr key={_id} className="m-4">
+                  <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                    {index + 1}
+                  </th>
+                  <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                    {category}
+                  </th>
+                  <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                    {title}
+                  </th>
+                  <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                    <button className="font-cinzel text-2xl text-colorFour font-semibold">
+                      Publish
+                    </button>
+                  </th>
+                  <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                    <button className="font-cinzel text-2xl text-colorFour font-semibold">
+                      UnPublish
+                    </button>
+                  </th>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default SurveyStatusSection;
