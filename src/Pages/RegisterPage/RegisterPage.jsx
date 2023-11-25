@@ -31,7 +31,7 @@ const RegisterPage = () => {
             console.log(result);
             formRef.current.reset();
 
-            const userInfo = { username, url, email };
+            const userInfo = { username, url, email, role: 'user' };
             publicApi
               .post('/users', userInfo)
               .then((response) => console.log(response))

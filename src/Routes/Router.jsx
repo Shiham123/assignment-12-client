@@ -7,6 +7,10 @@ import SurveyPage from '../Pages/SurveyPage/SurveyPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
 import DrawerLayout from '../Layout/DrawerLayout';
+import ManageUserSection from '../Section/AdminSection/ManageUserSection';
+import ChartSection from '../Section/AdminSection/ChartSection';
+import SurveyStatusSection from '../Section/AdminSection/SurveyStatusSection';
+import SurveyResponseSection from '../Section/AdminSection/SurveyResponseSection';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +25,16 @@ const router = createBrowserRouter([
       { path: '/registerPage', element: <RegisterPage /> },
     ],
   },
-  { path: '/dashBroad', element: <DrawerLayout /> },
+  {
+    path: '/dashBroad',
+    element: <DrawerLayout />,
+    children: [
+      { path: 'charts', element: <ChartSection /> },
+      { path: 'manageUser', element: <ManageUserSection /> },
+      { path: 'surveyStatus', element: <SurveyStatusSection /> },
+      { path: 'surveyResponse', element: <SurveyResponseSection /> },
+    ],
+  },
 ]);
 
 export default router;
