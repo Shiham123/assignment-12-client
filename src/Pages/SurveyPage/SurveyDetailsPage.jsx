@@ -14,12 +14,10 @@ const SurveyDetailsPage = () => {
     },
   });
 
-  console.log(perItems);
-
   const { title, description, category, timestamp } = perItems;
 
   return (
-    <div className="flex justify-center items-center text-3xl flex-col gap-8 my-12">
+    <div className="flex justify-center items-center text-3xl flex-col gap-8 my-12 bg-colorTwo border-2 border-colorOne m-4 p-4 rounded-lg">
       <h1>{title}</h1>
       <p>{description}</p>
       <p>{timestamp}</p>

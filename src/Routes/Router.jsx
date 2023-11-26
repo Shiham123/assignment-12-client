@@ -17,6 +17,7 @@ import UserFeedbackSection from '../Section/ServeyorSection/UserFeedbackSection'
 import AdminFeedbackSection from '../Section/ServeyorSection/AdminFeedbackSection';
 import SurveyResponse from '../Section/ServeyorSection/SurveyResponse';
 import SurveyDetailsPage from '../Pages/SurveyPage/SurveyDetailsPage';
+import UserPrivateRoute from './UserPrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,14 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: '/contact', element: <ContactPage /> },
       { path: '/surveyPage', element: <SurveyPage /> },
-      { path: '/surveyPage/:id', element: <SurveyDetailsPage /> },
+      {
+        path: '/surveyPage/:id',
+        element: (
+          <UserPrivateRoute>
+            <SurveyDetailsPage />
+          </UserPrivateRoute>
+        ),
+      },
       { path: '/loginPage', element: <LoginPage /> },
       { path: '/registerPage', element: <RegisterPage /> },
     ],
