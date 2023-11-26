@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import usePublicApi from '../../Hooks/usePublicApi';
 
 import {
@@ -9,13 +9,19 @@ import {
   AiOutlineLike,
 } from 'react-icons/ai';
 import useAuth from '../../Hooks/useAuth';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import useSecureApi from '../../Hooks/useSecureApi';
+import Swal from 'sweetalert2';
 
 const SurveyDetailsPage = () => {
   const { id } = useParams();
   const publicApi = usePublicApi();
   const { user } = useAuth();
   const [liked, setLiked] = useState('');
+  const formRef = useRef();
+  const secureApi = useSecureApi();
+  const navigate = useNavigate();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { data: perItems = [] } = useQuery({
     queryKey: ['perSurvey', id],
@@ -25,11 +31,16 @@ const SurveyDetailsPage = () => {
     },
   });
 
-  const { title, description, category, timestamp, question, options } =
+  const { _id, title, description, category, timestamp, question, options } =
     perItems;
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (formSubmitted) {
+      return;
+    }
+
     const formData = new FormData(event.target);
     const report = formData.get('report');
     const vote = formData.get('option');
@@ -38,8 +49,32 @@ const SurveyDetailsPage = () => {
       vote,
       userEmail: user?.email,
       userName: user?.displayName,
+      surveyItemId: _id,
     };
-    console.log(surveyInfo);
+
+    secureApi
+      .post('/visitedSurvey', surveyInfo)
+      .then((response) => {
+        console.log(response);
+        if (response.data.insertedId) {
+          Swal.fire({
+            title: 'Successfully added',
+            text: 'You already survey this item',
+            icon: 'success',
+          });
+        }
+        setFormSubmitted(true);
+        formRef.current.reset();
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: 'Already added item',
+          text: 'You already survey this item',
+          icon: 'question',
+        });
+      });
   };
 
   return (
@@ -58,6 +93,7 @@ const SurveyDetailsPage = () => {
       </h2>
       <form
         onSubmit={onSubmit}
+        ref={formRef}
         className="border-2 border-black p-8 rounded-lg"
       >
         <h2 className="font-semibold capitalize font-poppins text-xl">
@@ -88,6 +124,7 @@ const SurveyDetailsPage = () => {
 
         <button
           type="submit"
+          disabled={formSubmitted}
           className="bg-colorFive  font-poppins hover:bg-transparent border-2 border-colorFive text-colorTwo hover:text-colorFour duration-300 p-4 rounded-lg"
         >
           Submit Survey
