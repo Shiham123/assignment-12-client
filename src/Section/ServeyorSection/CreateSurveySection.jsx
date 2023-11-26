@@ -3,12 +3,14 @@ import SectionTitle from '../../SubSection/SectionTitle';
 import { useState } from 'react';
 import useSecureApi from '../../Hooks/useSecureApi';
 import swal from 'sweetalert';
+import useAuth from '../../Hooks/useAuth';
 
 const CreateSurveySection = () => {
   const [yesVoted] = useState(0);
   const [noVoted] = useState(0);
   const [liked] = useState(0);
   const [disliked] = useState(0);
+  const { user } = useAuth();
 
   const {
     register,
@@ -26,6 +28,8 @@ const CreateSurveySection = () => {
       liked,
       disliked,
       status: 'unpublished',
+      loggedInUser: user.email,
+      loggedInUserName: user?.displayName,
     };
     console.log(formData);
 
