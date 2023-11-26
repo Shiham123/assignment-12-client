@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import SectionTitle from '../../SubSection/SectionTitle';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useSecureApi from '../../Hooks/useSecureApi';
 import swal from 'sweetalert';
 import useAuth from '../../Hooks/useAuth';
@@ -11,6 +11,7 @@ const CreateSurveySection = () => {
   const [liked] = useState(0);
   const [disliked] = useState(0);
   const { user } = useAuth();
+  const formRef = useRef();
 
   const {
     register,
@@ -23,16 +24,15 @@ const CreateSurveySection = () => {
   const onSubmit = (data) => {
     const formData = {
       ...data,
-      options: ['Yes', 'No'],
-      yesVoted,
-      noVoted,
+      options: ['yes', 'no'],
       liked,
       disliked,
       status: 'unpublished',
-      loggedInUser: user.email,
-      loggedInUserName: user?.displayName,
+      surveyorEmail: user.email,
+      surveyorName: user?.displayName,
     };
     console.log(formData);
+    formRef.current.reset();
 
     swal('Survey created', 'Happy survey', 'success');
 
@@ -48,7 +48,7 @@ const CreateSurveySection = () => {
         heading="Create a survey"
         subHeading="Make sure you have a proper survey"
       />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} ref={formRef}>
         <div className="flex gap-8 my-8">
           <div className="w-1/2">
             <label htmlFor="" className="font-cinzel text-2xl font-semibold">
@@ -84,48 +84,69 @@ const CreateSurveySection = () => {
           </div>
         </div>
 
-        <div>
-          <label className="font-cinzel text-3xl font-semibold">
-            Select a category:
-          </label>
-          <select
-            id="category"
-            name="category"
-            className="font-cinzel text-3xl font-semibold border-none outline-none px-4 mx-4 rounded-lg bg-colorFive"
-            {...register('category', { required: true })}
-          >
-            <option
-              className="font-cinzel text-3xl font-semibold"
-              value="politics"
-            >
-              Politics
-            </option>
-            <option
-              className="font-cinzel text-3xl font-semibold"
-              value="social-issues"
-            >
-              Social Issues
-            </option>
-            <option
-              className="font-cinzel text-3xl font-semibold"
-              value="technology"
-            >
-              Technology and Innovation
-            </option>
-            <option
-              className="font-cinzel text-3xl font-semibold"
-              value="entertainment"
-            >
-              Entertainment and Pop Culture
-            </option>
-          </select>
+        <div className="flex gap-8">
+          <div className="w-1/2">
+            <div>
+              <label className="font-cinzel text-3xl font-semibold">
+                Select a category:
+              </label>
+              <select
+                id="category"
+                name="category"
+                className="font-cinzel text-3xl font-semibold border-none outline-none px-4 mx-4 rounded-lg bg-colorFive"
+                {...register('category', { required: true })}
+              >
+                <option
+                  className="font-cinzel text-3xl font-semibold"
+                  value="politics"
+                >
+                  Politics
+                </option>
+                <option
+                  className="font-cinzel text-3xl font-semibold"
+                  value="social-issues"
+                >
+                  Social Issues
+                </option>
+                <option
+                  className="font-cinzel text-3xl font-semibold"
+                  value="technology"
+                >
+                  Technology and Innovation
+                </option>
+                <option
+                  className="font-cinzel text-3xl font-semibold"
+                  value="entertainment"
+                >
+                  Entertainment and Pop Culture
+                </option>
+              </select>
+            </div>
+            {errors.category && (
+              <p className="font-poppins text-2xl">Must provide a title</p>
+            )}
+          </div>
+          {/*  */}
+          <div className="w-1/2">
+            <div className="w-full">
+              <label htmlFor="" className="font-cinzel text-2xl font-semibold">
+                Question :{' '}
+              </label>
+              <input
+                type="text"
+                className="w-full rounded-lg p-4 outline-none border-[1px] border-colorFour font-poppins"
+                placeholder="Add your question here"
+                {...register('question', { required: true })}
+              />
+            </div>
+            {errors.question && (
+              <p className="font-poppins text-2xl">Must provide a title</p>
+            )}
+          </div>
         </div>
-        {errors.category && (
-          <p className="font-poppins text-2xl">Must provide a title</p>
-        )}
 
         {/* options */}
-        <div className="my-8">
+        {/* <div className="my-8">
           <label className="font-cinzel text-3xl font-semibold">
             Yes/No Options:
           </label>
@@ -150,11 +171,11 @@ const CreateSurveySection = () => {
               No
             </label>
           </div>
-        </div>
+        </div> */}
 
         <button
           type="submit"
-          className="bg-colorFive px-12 py-4 text-sm md:text-xl lg:text-2xl font-cinzel font-bold tracking-wide rounded-lg border-2 border-colorFive hover:bg-transparent duration-200"
+          className="bg-colorFive my-8 px-12 py-4 text-sm md:text-xl lg:text-2xl font-cinzel font-bold tracking-wide rounded-lg border-2 border-colorFive hover:bg-transparent duration-200"
         >
           Submit form
         </button>
