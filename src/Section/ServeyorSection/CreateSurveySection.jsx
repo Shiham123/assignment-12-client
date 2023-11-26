@@ -6,8 +6,6 @@ import swal from 'sweetalert';
 import useAuth from '../../Hooks/useAuth';
 
 const CreateSurveySection = () => {
-  const [yesVoted] = useState(0);
-  const [noVoted] = useState(0);
   const [liked] = useState(0);
   const [disliked] = useState(0);
   const { user } = useAuth();
