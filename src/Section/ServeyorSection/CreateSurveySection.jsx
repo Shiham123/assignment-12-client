@@ -23,6 +23,7 @@ const CreateSurveySection = () => {
   const onSubmit = (data) => {
     const formData = {
       ...data,
+      options: ['Yes', 'No'],
       yesVoted,
       noVoted,
       liked,
@@ -122,6 +123,34 @@ const CreateSurveySection = () => {
         {errors.category && (
           <p className="font-poppins text-2xl">Must provide a title</p>
         )}
+
+        {/* options */}
+        <div className="my-8">
+          <label className="font-cinzel text-3xl font-semibold">
+            Yes/No Options:
+          </label>
+          <div className="flex items-center">
+            <input
+              type="radio"
+              id="yesOption"
+              value="yes"
+              {...register('options', { required: true })}
+            />
+            <label htmlFor="yesOption" className="ml-2 mr-4">
+              Yes
+            </label>
+
+            <input
+              type="radio"
+              id="noOption"
+              value="no"
+              {...register('options', { required: true })}
+            />
+            <label htmlFor="noOption" className="ml-2">
+              No
+            </label>
+          </div>
+        </div>
 
         <button
           type="submit"
