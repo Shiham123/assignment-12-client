@@ -102,10 +102,10 @@ const SurveyDetailsPage = () => {
 
         {options && (
           <div className="flex gap-8 my-8">
-            <label htmlFor="yes">Yes</label>
+            <label htmlFor="yes">{options[0]}</label>
             <input type="radio" name="option" id="yes" value={options[0]} />
 
-            <label htmlFor="no">No</label>
+            <label htmlFor="no">{options[1]}</label>
             <input type="radio" name="option" id="no" value={options[1]} />
           </div>
         )}
