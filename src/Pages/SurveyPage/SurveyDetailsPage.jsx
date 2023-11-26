@@ -56,7 +56,6 @@ const SurveyDetailsPage = () => {
       <h2 className="font-semibold capitalize font-poppins text-xl">
         Survey Category : {category}
       </h2>
-
       <form
         onSubmit={onSubmit}
         className="border-2 border-black p-8 rounded-lg"
@@ -87,31 +86,6 @@ const SurveyDetailsPage = () => {
           />
         </div>
 
-        {/* Liked section */}
-
-        <div className="flex my-8">
-          <AiOutlineLike
-            size={50}
-            className={`cursor-pointer ${liked === 'liked' ? 'hidden' : ''}`}
-            onClick={() => setLiked('liked')}
-          />
-          <AiFillLike
-            size={50}
-            className={`cursor-pointer ${liked === 'liked' ? '' : 'hidden'}`}
-          />
-
-          {/* disliked */}
-          <AiOutlineDislike
-            size={50}
-            className={`cursor-pointer ${liked === 'disliked' ? 'hidden' : ''}`}
-            onClick={() => setLiked('disliked')}
-          />
-          <AiFillDislike
-            size={50}
-            className={`cursor-pointer ${liked === 'disliked' ? '' : 'hidden'}`}
-          />
-        </div>
-
         <button
           type="submit"
           className="bg-colorFive  font-poppins hover:bg-transparent border-2 border-colorFive text-colorTwo hover:text-colorFour duration-300 p-4 rounded-lg"
@@ -119,6 +93,30 @@ const SurveyDetailsPage = () => {
           Submit Survey
         </button>
       </form>
+      {/* Liked section */}
+      <h1>Please like or dislike to help our create better survey</h1>
+      <div className="flex my-8">
+        <AiOutlineLike
+          size={50}
+          className={`cursor-pointer ${liked === 'liked' ? 'hidden' : ''}`}
+          onClick={() => setLiked('liked')}
+        />
+        <AiFillLike
+          size={50}
+          className={`cursor-pointer ${liked === 'liked' ? '' : 'hidden'}`}
+        />
+
+        {/* disliked */}
+        <AiOutlineDislike
+          size={50}
+          className={`cursor-pointer ${liked === 'disliked' ? 'hidden' : ''}`}
+          onClick={() => setLiked('disliked')}
+        />
+        <AiFillDislike
+          size={50}
+          className={`cursor-pointer ${liked === 'disliked' ? '' : 'hidden'}`}
+        />
+      </div>
     </div>
   );
 };
