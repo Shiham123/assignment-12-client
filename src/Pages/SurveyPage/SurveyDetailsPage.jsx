@@ -21,7 +21,6 @@ const SurveyDetailsPage = () => {
   const formRef = useRef();
   const secureApi = useSecureApi();
   const navigate = useNavigate();
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const { data: perItems = [] } = useQuery({
     queryKey: ['perSurvey', id],
@@ -36,10 +35,6 @@ const SurveyDetailsPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    if (formSubmitted) {
-      return;
-    }
 
     const formData = new FormData(event.target);
     const report = formData.get('report');
@@ -63,7 +58,6 @@ const SurveyDetailsPage = () => {
             icon: 'success',
           });
         }
-        setFormSubmitted(true);
         formRef.current.reset();
         navigate('/');
       })
@@ -124,7 +118,6 @@ const SurveyDetailsPage = () => {
 
         <button
           type="submit"
-          disabled={formSubmitted}
           className="bg-colorFive  font-poppins hover:bg-transparent border-2 border-colorFive text-colorTwo hover:text-colorFour duration-300 p-4 rounded-lg"
         >
           Submit Survey
