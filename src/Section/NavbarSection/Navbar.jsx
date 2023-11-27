@@ -78,6 +78,16 @@ const Navbar = () => {
                 >
                   DashBroad
                 </NavLink>
+                <NavLink
+                  to="/proUser"
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'font-poppins text-white font-semibold px-4'
+                      : 'font-poppins text-colorFour font-semibold px-4'
+                  }
+                >
+                  Become pro user
+                </NavLink>
               </div>
             </ul>
           </div>
@@ -140,6 +150,16 @@ const Navbar = () => {
                 DashBroad
               </NavLink>
             )}
+            <NavLink
+              to="/proUser"
+              className={({ isActive }) =>
+                isActive
+                  ? 'font-poppins text-colorFive font-semibold px-4'
+                  : 'font-poppins text-white font-semibold px-4'
+              }
+            >
+              Become pro user
+            </NavLink>
           </ul>
         </div>
         <div className="navbar-end">

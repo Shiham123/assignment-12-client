@@ -18,6 +18,7 @@ import AdminFeedbackSection from '../Section/ServeyorSection/AdminFeedbackSectio
 import SurveyResponse from '../Section/ServeyorSection/SurveyResponse';
 import SurveyDetailsPage from '../Pages/SurveyPage/SurveyDetailsPage';
 import UserPrivateRoute from './UserPrivateRoute';
+import PaymentPage from '../Pages/PaymentPage/PaymentPage';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       },
       { path: '/loginPage', element: <LoginPage /> },
       { path: '/registerPage', element: <RegisterPage /> },
+      { path: '/proUser', element: <PaymentPage /> },
     ],
   },
   {
