@@ -13,67 +13,63 @@ const SurveyResponseSection = () => {
     },
   });
 
-  // const { detailedInformation, totalYesVotes } = responseItem;
-
-  const userInfo = responseItem.detailedInformation || [];
-  const totalVote = responseItem.totalYesVotes;
-
   return (
     <div>
       <SectionTitle
-        heading="Survey response"
-        subHeading="all survey here by added various user"
+        heading="survey response"
+        subHeading="here are all survey user based on per survey"
       />
+      {responseItem.map((item, index) => (
+        <div className="mt-12" key={index}>
+          <SectionTitle heading={`User response ${index + 1}`} />
 
-      <div className="overflow-x-hidden">
-        <table className="table">
-          <thead>
-            <tr className="bg-colorFive font-cinzel text-xl">
-              <th className="text-colorTwo font-poppins tracking-wider">
-                Number
-              </th>
-              <th className="text-colorTwo font-poppins tracking-wider">
-                Name
-              </th>
-              <th className="text-colorTwo font-poppins tracking-wider">
-                Email
-              </th>
-              <th className="text-colorTwo font-poppins tracking-wider">
-                Time
-              </th>
-              <th className="text-colorTwo font-poppins tracking-wider">
-                Total Vote
-              </th>
-            </tr>
-          </thead>
-
-          {/*  */}
-          <tbody>
-            {userInfo.map((item, index) => {
-              const { userName, userEmail, timestamp } = item;
-              return (
-                <tr key={index}>
-                  <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    {index + 1}
-                  </td>
-                  <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    {userName}
-                  </td>
-                  <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    {userEmail}
-                  </td>
-                  <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    {timestamp}
-                  </td>
-                  <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                    {totalVote}
-                  </td>
+          <div className="overflow-x-hidden">
+            <table className="table">
+              <thead>
+                <tr className="bg-colorFive font-cinzel text-xl">
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Number
+                  </th>
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Name
+                  </th>
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Email
+                  </th>
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Time
+                  </th>
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Total Vote
+                  </th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+              </thead>
+
+              <tbody>
+                {item.info.map((info, subIndex) => (
+                  <tr key={subIndex}>
+                    <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                      {subIndex + 1}
+                    </td>
+                    <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                      {info.userName}
+                    </td>
+                    <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                      {info.userEmail}
+                    </td>
+                    <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                      {info.timestamp}
+                    </td>
+                    <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                      {item.totalVotesPerItem}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
