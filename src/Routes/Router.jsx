@@ -19,6 +19,7 @@ import SurveyResponse from '../Section/ServeyorSection/SurveyResponse';
 import SurveyDetailsPage from '../Pages/SurveyPage/SurveyDetailsPage';
 import UserPrivateRoute from './UserPrivateRoute';
 import PaymentPage from '../Pages/PaymentPage/PaymentPage';
+import AdminPrivateRoute from './AdminPrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -46,11 +47,46 @@ const router = createBrowserRouter([
     path: '/dashBroad',
     element: <DrawerLayout />,
     children: [
-      { path: 'charts', element: <ChartSection /> },
-      { path: 'manageUser', element: <ManageUserSection /> },
-      { path: 'surveyStatus', element: <SurveyStatusSection /> },
-      { path: 'surveyResponse', element: <SurveyResponseSection /> },
-      { path: 'paymentUser', element: <PaymentSection /> },
+      {
+        path: 'charts',
+        element: (
+          <AdminPrivateRoute>
+            <ChartSection />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: 'manageUser',
+        element: (
+          <AdminPrivateRoute>
+            <ManageUserSection />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: 'surveyStatus',
+        element: (
+          <AdminPrivateRoute>
+            <SurveyStatusSection />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: 'surveyResponse',
+        element: (
+          <AdminPrivateRoute>
+            <SurveyResponseSection />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: 'paymentUser',
+        element: (
+          <AdminPrivateRoute>
+            <PaymentSection />
+          </AdminPrivateRoute>
+        ),
+      },
 
       // Survey route
       { path: 'createSurvey', element: <CreateSurveySection /> },

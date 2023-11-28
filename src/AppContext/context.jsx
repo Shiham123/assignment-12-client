@@ -54,7 +54,7 @@ const AppProvider = ({ children }) => {
       if (currentUser) {
         const userInfo = { email: currentUser.email };
         publicApi
-          .post('jwt', userInfo)
+          .post('/jwt', userInfo)
           .then((response) => {
             if (response.data) {
               localStorage.setItem('access-token', response.data);

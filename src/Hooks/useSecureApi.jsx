@@ -1,10 +1,15 @@
 import axios from 'axios';
+import useAuth from './useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const secureApi = axios.create({
   baseURL: 'http://localhost:5000',
 });
 
 const useSecureApi = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
   secureApi.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem('access-token');
@@ -22,7 +27,13 @@ const useSecureApi = () => {
       return response;
     },
     (error) => {
-      console.log(error);
+      const status = error.response.status;
+      if (status === 401 || status === 403) {
+        navigate('/loginPage');
+        logOut()
+          .then((response) => console.log(response))
+          .catch((error) => console.log(error));
+      }
       return Promise.reject(error);
     }
   );
