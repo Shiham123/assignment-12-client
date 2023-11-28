@@ -20,6 +20,7 @@ import SurveyDetailsPage from '../Pages/SurveyPage/SurveyDetailsPage';
 import UserPrivateRoute from './UserPrivateRoute';
 import PaymentPage from '../Pages/PaymentPage/PaymentPage';
 import AdminPrivateRoute from './AdminPrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,14 @@ const router = createBrowserRouter([
       },
       { path: '/loginPage', element: <LoginPage /> },
       { path: '/registerPage', element: <RegisterPage /> },
-      { path: '/proUser', element: <PaymentPage /> },
+      {
+        path: '/proUser',
+        element: (
+          <PrivateRoute>
+            <PaymentPage />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
