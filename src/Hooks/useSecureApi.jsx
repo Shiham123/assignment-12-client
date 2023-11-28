@@ -1,15 +1,10 @@
 import axios from 'axios';
-import useAuth from './useAuth';
-import { useNavigate } from 'react-router-dom';
 
 const secureApi = axios.create({
   baseURL: 'http://localhost:5000',
 });
 
 const useSecureApi = () => {
-  const { logOut } = useAuth();
-  const navigate = useNavigate();
-
   secureApi.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem('access-token');
