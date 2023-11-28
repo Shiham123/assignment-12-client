@@ -2,17 +2,22 @@ import { useQuery } from '@tanstack/react-query';
 import useSecureApi from '../../Hooks/useSecureApi';
 import SectionTitle from '../../SubSection/SectionTitle';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 const SurveyStatusSection = () => {
   const secureApi = useSecureApi();
 
-  const { data: surveyItems = [] } = useQuery({
+  const { data: surveyItems = [], refetch } = useQuery({
     queryKey: ['items'],
     queryFn: async () => {
       const response = await secureApi.get('/survey');
       return response.data;
     },
   });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const surveyUnpublish = (item) => {
     const { _id } = item;
@@ -43,16 +48,21 @@ const SurveyStatusSection = () => {
 
         const feedback = {
           enteredMessage,
+          status: 'unpublish',
         };
-
         secureApi
           .put(`/survey/${_id}`, feedback)
-          .then((response) => console.log(response))
+          .then((response) => {
+            console.log(response);
+            refetch();
+          })
           .catch((error) => console.log(error));
       })
       .catch((error) => {
         console.error(error);
       });
+
+    refetch();
   };
 
   const surveyPublish = (item) => {
@@ -78,7 +88,10 @@ const SurveyStatusSection = () => {
 
         secureApi
           .patch(`/survey/${_id}`, publishSurvey)
-          .then((response) => console.log(response))
+          .then((response) => {
+            console.log(response);
+            refetch();
+          })
           .catch((error) => console.log(error));
       }
     });
@@ -130,7 +143,7 @@ const SurveyStatusSection = () => {
                   <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
                     <button
                       onClick={() => surveyPublish(item)}
-                      className="font-cinzel text-2xl text-colorFour font-semibold"
+                      className="font-cinzel text-2xl text-colorFour font-semibold bg-colorFive p-4 rounded-lg"
                     >
                       Publish
                     </button>
@@ -138,7 +151,7 @@ const SurveyStatusSection = () => {
                   <th className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
                     <button
                       onClick={() => surveyUnpublish(item)}
-                      className="font-cinzel text-2xl text-colorFour font-semibold"
+                      className="font-cinzel text-2xl text-colorFour font-semibold bg-colorFive p-4 rounded-lg"
                     >
                       UnPublish
                     </button>

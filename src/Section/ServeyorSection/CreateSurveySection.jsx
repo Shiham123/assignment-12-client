@@ -25,7 +25,7 @@ const CreateSurveySection = () => {
       options: ['yes', 'no'],
       liked,
       disliked,
-      status: 'unpublished',
+      status: 'pending',
       surveyorEmail: user.email,
       surveyorName: user?.displayName,
     };
