@@ -45,6 +45,8 @@ const SurveyDetailsPage = () => {
       userEmail: user?.email,
       userName: user?.displayName,
       surveyItemId: _id,
+      title: title,
+      category: category,
     };
 
     secureApi
