@@ -25,8 +25,6 @@ const UserFeedbackSection = () => {
       {emailRes.map((item, index) => {
         return (
           <div className="mt-12" key={index}>
-            <SectionTitle heading={`User response ${index + 1}`} />
-
             <div className="overflow-x-hidden">
               <table className="table">
                 <thead>

@@ -24,8 +24,6 @@ const SurveyResponse = () => {
 
       {emailRes.map((item, index) => (
         <div className="mt-12" key={index}>
-          <SectionTitle heading={`User response ${index + 1}`} />
-
           <div className="overflow-x-hidden">
             <table className="table">
               <thead>
@@ -73,7 +71,7 @@ const SurveyResponse = () => {
                         {item.totalVotesPerItem}
                       </td>
                       <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
-                        {info.title}
+                        {title}
                       </td>
                     </tr>
                   );
