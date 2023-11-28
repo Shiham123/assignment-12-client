@@ -27,13 +27,6 @@ const useSecureApi = () => {
       return response;
     },
     (error) => {
-      const status = error.response.status;
-      if (status === 401 || status === 403) {
-        navigate('/loginPage');
-        logOut()
-          .then((response) => console.log(response))
-          .catch((error) => console.log(error));
-      }
       return Promise.reject(error);
     }
   );
