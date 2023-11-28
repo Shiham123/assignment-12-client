@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const publicApi = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://assignment-12-server-theta-eosin.vercel.app',
 });
 
 const usePublicApi = () => {
