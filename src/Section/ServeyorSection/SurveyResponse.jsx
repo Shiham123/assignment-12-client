@@ -45,12 +45,15 @@ const SurveyResponse = () => {
                   <th className="text-colorTwo font-poppins tracking-wider">
                     Vote
                   </th>
+                  <th className="text-colorTwo font-poppins tracking-wider">
+                    Vote
+                  </th>
                 </tr>
               </thead>
 
               <tbody>
                 {item.info.map((info, subIndex) => {
-                  const { userName, userEmail, timestamp } = info;
+                  const { userName, userEmail, timestamp, title } = info;
 
                   return (
                     <tr key={subIndex}>
@@ -68,6 +71,9 @@ const SurveyResponse = () => {
                       </td>
                       <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
                         {item.totalVotesPerItem}
+                      </td>
+                      <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                        {info.title}
                       </td>
                     </tr>
                   );

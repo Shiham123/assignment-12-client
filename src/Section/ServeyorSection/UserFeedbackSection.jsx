@@ -43,16 +43,19 @@ const UserFeedbackSection = () => {
                     <th className="text-colorTwo font-poppins tracking-wider">
                       Time
                     </th>
-
                     <th className="text-colorTwo font-poppins tracking-wider">
                       Report
+                    </th>
+                    <th className="text-colorTwo font-poppins tracking-wider">
+                      Title
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {item.info.map((info, subIndex) => {
-                    const { report, userName, userEmail, timestamp } = info;
+                    const { report, userName, userEmail, timestamp, title } =
+                      info;
                     const modalId = `my_modal_${subIndex + 1}`;
 
                     return (
@@ -89,6 +92,9 @@ const UserFeedbackSection = () => {
                               <button>close</button>
                             </form>
                           </dialog>
+                        </td>
+                        <td className="font-cinzel text-2xl text-colorFour font-semibold py-8 border-2 border-colorTwo">
+                          {title}
                         </td>
                       </tr>
                     );
