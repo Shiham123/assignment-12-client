@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import ButtonComponent from '../../SubComponent/button';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SectionTitle from '../../SubSection/SectionTitle';
 import useAuth from '../../Hooks/useAuth';
 import swal from 'sweetalert';
@@ -20,8 +20,8 @@ const LoginPage = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
   const publicApi = usePublicApi();
-  // const location = useLocation();
-  // const from = location.state.from.pathname;
+  const location = useLocation();
+  const from = location.state?.from?.pathname;
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -30,7 +30,7 @@ const LoginPage = () => {
         console.log(result);
         formRef.current.reset();
         swal('login successfully', 'you logged in successfully', 'success');
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
