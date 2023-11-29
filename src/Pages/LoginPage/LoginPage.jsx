@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const publicApi = usePublicApi();
   const location = useLocation();
-  const from = location.state?.from?.pathname;
+  const from = location.state?.from?.pathname || '/';
 
   const onSubmit = (data) => {
     const { email, password } = data;
