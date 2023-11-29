@@ -18,7 +18,7 @@ const SurveyDetailsPage = () => {
   const { id } = useParams();
   const publicApi = usePublicApi();
   const { user } = useAuth();
-  const [liked, setLiked] = useState('');
+  const [like, setLike] = useState('');
   const formRef = useRef();
   const secureApi = useSecureApi();
   const navigate = useNavigate();
@@ -41,6 +41,8 @@ const SurveyDetailsPage = () => {
     question,
     options,
     comment,
+    liked,
+    disliked,
   } = perItems;
 
   const onSubmit = (event) => {
@@ -107,6 +109,26 @@ const SurveyDetailsPage = () => {
       .catch((error) => console.log(error));
   };
 
+  const likeSurvey = () => {
+    publicApi
+      .patch(`/like/${_id}`)
+      .then((response) => {
+        console.log(response);
+        refetch();
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const dislikeSurvey = () => {
+    publicApi
+      .patch(`/dislike/${_id}`)
+      .then((response) => {
+        console.log(response);
+        refetch();
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="flex justify-center items-center text-3xl flex-col gap-8 my-12 bg-colorTwo border-2 border-colorOne m-4 p-4 rounded-lg">
       <h1 className="font-semibold capitalize font-poppins text-3xl">
@@ -162,26 +184,46 @@ const SurveyDetailsPage = () => {
       {/* Liked section */}
       <h1>Please like or dislike to help our create better survey</h1>
       <div className="flex my-8">
-        <AiOutlineLike
-          size={50}
-          className={`cursor-pointer ${liked === 'liked' ? 'hidden' : ''}`}
-          onClick={() => setLiked('liked')}
-        />
-        <AiFillLike
-          size={50}
-          className={`cursor-pointer ${liked === 'liked' ? '' : 'hidden'}`}
-        />
+        <div className="flex justify-center items-center mx-12">
+          {liked && (
+            <p className="bg-colorFour text-colorThree rounded-full p-1 text-[7px]">
+              {liked}
+            </p>
+          )}
+          <AiOutlineLike
+            size={50}
+            className={`cursor-pointer ${like === 'like' ? 'hidden' : ''}`}
+            onClick={() => {
+              setLike('like');
+              likeSurvey();
+            }}
+          />
+          <AiFillLike
+            size={50}
+            className={`cursor-pointer ${like === 'like' ? '' : 'hidden'}`}
+          />
+        </div>
 
         {/* disliked */}
-        <AiOutlineDislike
-          size={50}
-          className={`cursor-pointer ${liked === 'disliked' ? 'hidden' : ''}`}
-          onClick={() => setLiked('disliked')}
-        />
-        <AiFillDislike
-          size={50}
-          className={`cursor-pointer ${liked === 'disliked' ? '' : 'hidden'}`}
-        />
+        <div className="flex justify-center items-center mx-12">
+          {disliked && (
+            <p className="bg-colorFour text-colorThree rounded-full p-1 text-[7px]">
+              {disliked}
+            </p>
+          )}
+          <AiOutlineDislike
+            size={50}
+            className={`cursor-pointer ${like === 'dislike' ? 'hidden' : ''}`}
+            onClick={() => {
+              setLike('dislike');
+              dislikeSurvey();
+            }}
+          />
+          <AiFillDislike
+            size={50}
+            className={`cursor-pointer ${like === 'dislike' ? '' : 'hidden'}`}
+          />
+        </div>
       </div>
 
       {/*  */}
