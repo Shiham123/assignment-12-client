@@ -4,6 +4,7 @@ import ButtonComponent from '../../SubComponent/button';
 import useAuth from '../../Hooks/useAuth';
 import Swal from 'sweetalert2';
 import useUsers from '../../Hooks/useUsers';
+import useProUser from '../../Hooks/useProUser';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -11,6 +12,7 @@ const Navbar = () => {
   const photoUrl = user?.photoURL;
 
   const [isNormalUser] = useUsers();
+  const [proUser] = useProUser();
 
   const handleLogout = () => {
     logOut()
@@ -136,7 +138,7 @@ const Navbar = () => {
               Survey Page
             </NavLink>
             {/* Drawer or dashBroad */}
-            {isNormalUser ? (
+            {isNormalUser || proUser ? (
               ''
             ) : (
               <NavLink
@@ -165,6 +167,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
+          {proUser === true ? (
+            <h1 className="bg-colorFour text-colorThree rounded-full p-2 text-[5px]">
+              Pro
+            </h1>
+          ) : (
+            ''
+          )}
           <div className="flex justify-center items-center gap-4 mx-8">
             <div>
               {username && (

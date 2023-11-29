@@ -12,6 +12,7 @@ import useAuth from '../../Hooks/useAuth';
 import { useRef, useState } from 'react';
 import useSecureApi from '../../Hooks/useSecureApi';
 import Swal from 'sweetalert2';
+import useProUser from '../../Hooks/useProUser';
 
 const SurveyDetailsPage = () => {
   const { id } = useParams();
@@ -21,8 +22,9 @@ const SurveyDetailsPage = () => {
   const formRef = useRef();
   const secureApi = useSecureApi();
   const navigate = useNavigate();
+  const [proUser] = useProUser();
 
-  const { data: perItems = [] } = useQuery({
+  const { data: perItems = [], refetch } = useQuery({
     queryKey: ['perSurvey', id],
     queryFn: async () => {
       const response = await publicApi.get(`/survey/details/${id}`);
@@ -30,8 +32,16 @@ const SurveyDetailsPage = () => {
     },
   });
 
-  const { _id, title, description, category, timestamp, question, options } =
-    perItems;
+  const {
+    _id,
+    title,
+    description,
+    category,
+    timestamp,
+    question,
+    options,
+    comment,
+  } = perItems;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -71,6 +81,30 @@ const SurveyDetailsPage = () => {
           icon: 'question',
         });
       });
+  };
+
+  const handleComment = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const comment = formData.get('comment');
+
+    const proUserComment = { comment };
+
+    publicApi
+      .put(`/survey/details/${_id}`, proUserComment)
+      .then((response) => {
+        console.log(response);
+
+        if (response.data.matchedCount || response.data.matchedCount) {
+          Swal.fire({
+            title: 'Comment added',
+            icon: 'success',
+          });
+          formRef.current.reset();
+          refetch();
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -148,6 +182,51 @@ const SurveyDetailsPage = () => {
           size={50}
           className={`cursor-pointer ${liked === 'disliked' ? '' : 'hidden'}`}
         />
+      </div>
+
+      {/*  */}
+
+      {proUser === true && (
+        <form
+          onSubmit={handleComment}
+          ref={formRef}
+          className="flex flex-col justify-center items-center border-2 border-colorFour p-8 rounded-lg"
+        >
+          <label htmlFor="" className="font-semibold">
+            Comment :{' '}
+          </label>
+          <input
+            className="bg-colorThree text-xl font-poppins mx-4 outline-none border-2 border-colorFive rounded-lg p-4"
+            type="text"
+            placeholder="type your comment here"
+            name="comment"
+          />
+          <button className="border-2 border-colorFive rounded-lg bg-colorFive hover:bg-transparent p-4 m-4 duration-300">
+            Submit
+          </button>
+        </form>
+      )}
+
+      <div className="flex flex-col justify-center items-center">
+        <h3 className="font-cinzel text-3xl font-semibold border-b-2 border-colorFour">
+          Here are All comments
+        </h3>
+        {comment &&
+          comment.map((perComment, index) => {
+            return (
+              <div
+                key={index}
+                className="flex gap-12 border-t-2 border-colorFour p-8 m-4"
+              >
+                <p className="font-poppins text-2xl font-semibold">
+                  {index + 1}
+                </p>
+                <p className="font-poppins text-2xl font-semibold">
+                  {perComment}
+                </p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
