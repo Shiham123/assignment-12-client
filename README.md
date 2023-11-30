@@ -1,8 +1,11 @@
-# React + Vite
+i am using some different method not in requirement but i am added in the project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- admin and surveyor not able to see BECOME PRO USER route. because i don't think this is realistic
+- add pro user not able to see BECOME PRO USER route.
+- and i made a mistake when i am create project. i am using secure api for without admin that's a mistake for this reason i am not able apply to verify admin.
+- i am using various hook for verify user role like admin and user and pro user. i have not enough time to make tha project code more readable.
+- and i am also use various various private route for various user role.
 
-Currently, two official plugins are available:
+**this is important information**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**my average is 59 and i am doing my best for stay with your course sir. my only profession is this development. my previous assignment result is good i fullfil almost all requirement of your. so please sir my dream is MERN stack. and it's become full fil. please sir i need only 50 percent mark to go SCIC.**
