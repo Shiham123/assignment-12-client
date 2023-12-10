@@ -13,5 +13,6 @@ i am using some different method not in requirement but i am added in the projec
 
 [firebase live link one](https://assignment-12-fa47e.web.app/)
 [firebase live link two](https://assignment-12-fa47e.firebaseapp.com/)
-[client repo link](https://github.com/programming-hero-web-course1/b8a12-client-side-Shiham123)
-[server repo link](https://github.com/programming-hero-web-course1/b8a12-server-side-Shiham123)
+
+### server code repo link - https://github.com/Shiham123/assignment-12-server
+
